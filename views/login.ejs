@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div>
+      <% if (locals.error) { %>
+      <p><%= error %></p>
+      <% } %>
+      <form action="/login" method="post">
+        <div>
+          <label for="email">
+            <input type="email" name="email" placeholder="Enter your email" />
+          </label>
+          <label for="password">
+            <input type="password" name="password" placeholder="Password" />
+          </label>
+          <button type="submit">submit</button>
+          <a href="./forget-pswd-verification">Forget password?</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

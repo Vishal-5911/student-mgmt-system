@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div>
+    <% if (locals.message) { %>
+      <p>
+        <%= message %>
+      </p>
+      <% } %>
+        <form action="/student-data-form" method="post" enctype="multipart/form-data">
+          <div>
+            <label for="fullName">
+              <input type="fullName" name="fullName" placeholder="Enter your Name" />
+            </label>
+
+            <label for="email">
+              <input type="email" name="email" placeholder="Enter your email" />
+            </label>
+            <label for="fathersName">
+              <input type="text" name="fathersName" placeholder="fathers name" />
+            </label>
+            <label for="mothersName">
+              <input type="text" name="mothersName" placeholder="mothers name" />
+            </label>
+            <label for="standard">
+              <input type="text" name="standard" placeholder="Enter your class here" />
+            </label>
+            <label for="aadharNumber">
+              <input type="text" name="aadharNumber" placeholder="Enter your aadhar number here" />
+            </label>
+            <label for="profileImageURL">
+              <input type="file" name="profileImage" />
+            </label>
+            <button type="submit">submit</button>
+          </div>
+        </form>
+  </div>
+</body>
+
+</html>
