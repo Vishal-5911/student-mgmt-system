@@ -11,14 +11,31 @@ const cors = require("cors");
 const { generateAndSendOTP } = require("../services/otp");
 const session = require("express-session");
 
+
 const router = Router();
 
+const getFormattedDate = () => {
+  const now = new Date();
+  const dd = String(now.getDate()).padStart(2, "0");
+  const mm = String(now.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+  const yy = String(now.getFullYear()); // Get last 2 digits of year
+  const hh = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+
+  return `${dd}-${mm}-${yy}_${hh}hour-${min}min`;
+};
+
+
 const storage = multer.diskStorage({
-  destination: function (req, res, cb) {
-    cb(null, path.resolve(`./public/uploads/`));
+  destination: async function (req, res, cb) {
+    cb(null, path.resolve(`./public/uploads/`))
+
   },
   filename: function (req, file, cb) {
-    const filename = `${Date.now()}-${file.originalname}`;
+    const fullName = req.body.fullName;
+    const sanitizedFullName = fullName.replace(/\s+/g, "_");
+    const formattedDate = getFormattedDate();
+    const filename = `${sanitizedFullName}_${formattedDate}_${file.originalname}`;
     cb(null, filename);
   }
 })
@@ -51,7 +68,7 @@ router.get("/student-data-form", (req, res) => {
 })
 router.get("/student-portal", async (req, res) => {
   const email = req.session.email;
-  const { fullName, fathersName, mothersName, aadharNumber, profileImageURL, standard } = await StudentData.findOne(email);
+  const { fullName, fathersName, mothersName, aadharNumber, profileImageURL, standard } = await StudentData.findOne({ email });
   return res.render("student-portal", {
     fullName,
     email,
@@ -80,7 +97,7 @@ router.post("/register", async (req, res) => {
       email,
       password,
     });
-    res.redirect("/student-data");
+    res.redirect("/login");
   } catch (error) {
     console.log(error);
     return res.render("register", { message: "Something went wrong" });
@@ -90,12 +107,20 @@ router.post("/register", async (req, res) => {
 //To login an already existing student
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  req.session.email = email;
+
+
   try {
+    // Check if student exists
+    const student = await StudentData.findOne({ email });
+
+    if (!student) {
+      return res.redirect("/student-data-form"); // Redirect to form if student data not found
+    }
     const token = await StudentReg.matchPasswordAndGenerateToken(
       email,
       password,
     );
+    req.session.email = email;
 
     return res.cookie("token", token).redirect("/student-portal");
   } catch (error) {
@@ -191,7 +216,7 @@ router.post("/student-data-form", upload.single("profileImage"), async (req, res
       profileImageURL: `/uploads/${req.file.filename}`,
       standard,
     });
-    res.render("/");
+    res.redirect("/");
   } catch (error) {
     console.log(error);
     res.render("student-data", { message: "Email already exists" })

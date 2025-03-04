@@ -5,13 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Portal</title>
+    <link href="css/style.css" rel="stylesheet" />
 </head>
 
 <body>
     <div>
-        <h1>
-
-        </h1>
+        <img src="<%= locals.profileImageURL %>" alt="">
+        <p>
+            Name = <%= locals.fullName %>
+        </p>
+        <p>
+            Fathers Name = <%= locals.fathersName %>
+        </p>
+        <p>
+            Mothers Name = <%= locals.mothersName %>
+        </p>
+        <p>
+            Email = <%= locals.email %>
+        </p>
+        <p>
+            Aadhar Number = <%= locals.aadharNumber %>
+        </p>
+        <p>
+            Class = <%= locals.standard %>
+        </p>
     </div>
 </body>
 
