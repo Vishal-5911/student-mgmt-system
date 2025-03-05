@@ -12,7 +12,9 @@ Steps to work on this project with css and js
 
 **IMPORTANT**
 
-No work to be done in student portal ejs file
+Don't change anything that is already done untill its just a tag or some styling or anything
+
+DOn't change any attribute setting in ejs files nor in js files as a simple /logins can crash the server as the address in /login
 
 No changing anything in any file you are only allowed to add things according you your need
 
