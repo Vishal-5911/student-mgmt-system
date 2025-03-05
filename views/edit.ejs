@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit <%= field %>
+    </title>
+    <link href="/css/style.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <h2>Edit <%= field %>
+    </h2>
+    <form action="/edit/<%= student._id %>/<%= field %>" method="POST">
+        <input type="text" name="newValue" placeholder="Enter new <%= field %>" required>
+        <button type="submit">Update</button>
+    </form>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

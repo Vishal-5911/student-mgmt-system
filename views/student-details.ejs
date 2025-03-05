@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h2>Student Details</h2>
+    <table border="1">
+        <tr>
+            <td>Profile:</td>
+            <td>
+                <img src="<%= student.profileImageURL %>" alt="Profile" width="100"><br>
+                <a href="/edit-profile/<%= student._id %>">Edit Profile Picture</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Full Name:</td>
+            <td>
+                <%= student.fullName %> <a href="/edit/<%= student._id %>/fullName">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <%= student.email %> <a href="/edit/<%= student._id %>/email">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Father's Name:</td>
+            <td>
+                <%= student.fathersName %> <a href="/edit/<%= student._id %>/fathersName">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Mother's Name:</td>
+            <td>
+                <%= student.mothersName %> <a href="/edit/<%= student._id %>/mothersName">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Aadhar Number:</td>
+            <td>
+                <%= student.aadharNumber %> <a href="/edit/<%= student._id %>/aadharNumber">Edit</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Class:</td>
+            <td>
+                <%= student.standard %> <a href="/edit/<%= student._id %>/standard">Edit</a>
+            </td>
+        </tr>
+    </table>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

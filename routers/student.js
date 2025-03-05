@@ -27,7 +27,7 @@ const getFormattedDate = () => {
 
 
 const storage = multer.diskStorage({
-  destination: async function (req, res, cb) {
+  destination: function (req, res, cb) {
     cb(null, path.resolve(`./public/uploads/`))
 
   },

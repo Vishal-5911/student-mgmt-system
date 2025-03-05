@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script>
+        function applySorting() {
+            const sortBy = document.getElementById("sortBy").value;
+            window.location.href = `/admin-panel?sort=${sortBy}`;
+        }
+        function searchStudent() {
+            const query = document.getElementById("searchQuery").value;
+            window.location.href = `/admin-panel?search=${query}`;
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <h2>Admin Panel</h2>
+        <select id="sortBy" onchange="applySorting()">
+            <option value="">Sort By</option>
+            <option value="fullName">Name</option>
+            <option value="standard">Class</option>
+        </select>
+        <input type="text" id="searchQuery" placeholder="Search Student...">
+        <button onclick="searchStudent()">Search</button>
+    </nav>
+
+    <!-- Students Table -->
+    <table border="1">
+        <tr>
+            <th>Profile</th>
+            <th>Full Name</th>
+            <th>Class</th>
+            <th>Actions</th>
+        </tr>
+        <% students.forEach(student=> { %>
+            <tr>
+                <td><img src="<%= student.profileImageURL %>" alt="Profile" width="50"></td>
+                <td>
+                    <%= student.fullName %>
+                </td>
+                <td>
+                    <%= student.standard %>
+                </td>
+                <td>
+                    <a href="/student/<%= student._id %>">Edit</a>
+                </td>
+            </tr>
+            <% }); %>
+    </table>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

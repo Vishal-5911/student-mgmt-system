@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Register</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Admin Register</h2>
+
+        <% if (locals.message) { %>
+            <p class="error">
+                <%= message %>
+            </p>
+            <% } %>
+
+                <form action="/admin-register" method="POST">
+                    <label for="adminID">Admin ID:</label>
+                    <input type="text" id="adminID" name="adminID" required>
+
+                    <label for="creator">Creator Name:</label>
+                    <input type="text" id="creator" name="creator" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit">Register</button>
+                </form>
+    </div>
+</body>
+
+</html>

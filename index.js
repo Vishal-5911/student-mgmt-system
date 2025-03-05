@@ -17,6 +17,7 @@ app.use(
 
 // Routes
 const studentRoute = require("./routers/student");
+const adminRouter = require("./routers/admin")
 
 connectToMongoDB("mongodb://127.0.0.1:27017/school-mgmt-sys").then(() =>
   console.log("MongoDB Connected"),
@@ -29,6 +30,7 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 app.use("/", studentRoute);
+app.use("/", adminRouter);
 
 app.listen(PORT, () => {
   console.log(`Server started on ${PORT}`);

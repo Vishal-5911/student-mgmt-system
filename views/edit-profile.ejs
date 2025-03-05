@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Profile Picture</title>
+    <link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h2>Edit Profile Picture</h2>
+    <img src="<%= student.profileImageURL %>" alt="Current Profile" width="150"><br><br>
+
+    <form action="/edit-profile/<%= student._id %>" method="POST" enctype="multipart/form-data">
+        <input type="file" name="profileImage" accept="image/*" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <br>
+    <a href="/student/<%= student._id %>">Back to Student Details</a>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
