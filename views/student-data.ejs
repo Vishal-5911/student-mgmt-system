@@ -18,20 +18,29 @@
         <form action="/student-data-form" method="post" enctype="multipart/form-data">
           <div>
             <label for="fullName">
-              <input type="fullName" name="fullName" placeholder="Enter your Name" />
+              <input type="fullName" name="fullName" placeholder="Enter your Name" required />
             </label>
 
             <label for="email">
-              <input type="email" name="email" placeholder="Enter your email" />
+              <input type="email" name="email" placeholder="Enter your email" required />
             </label>
             <label for="fathersName">
-              <input type="text" name="fathersName" placeholder="fathers name" />
+              <input type="text" name="fathersName" placeholder="fathers name" required />
             </label>
             <label for="mothersName">
-              <input type="text" name="mothersName" placeholder="mothers name" />
+              <input type="text" name="mothersName" placeholder="mothers name" required />
             </label>
-            <label for="standard">
-              <input type="text" name="standard" placeholder="Enter your class here" />
+
+            <label for="semester">
+              <select name="semester" required>
+                <option value="1" selected>1st Semester</option>
+                <option value="2">2nd Semester</option>
+                <option value="3">3rd Semester</option>
+                <option value="4">4th Semester</option>
+                <option value="5">5th Semester</option>
+                <option value="6">6th Semester</option>
+                <option value="PGDCA">PGDCA</option>
+              </select>
             </label>
             <label for="aadharNumber">
               <input type="text" name="aadharNumber" placeholder="Enter your aadhar number here" />

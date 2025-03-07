@@ -5,30 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Portal</title>
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div>
-        <img src="<%= locals.profileImageURL %>" alt="">
-        <p>
-            Name = <%= locals.fullName %>
-        </p>
-        <p>
-            Fathers Name = <%= locals.fathersName %>
-        </p>
-        <p>
-            Mothers Name = <%= locals.mothersName %>
-        </p>
-        <p>
-            Email = <%= locals.email %>
-        </p>
-        <p>
-            Aadhar Number = <%= locals.aadharNumber %>
-        </p>
-        <p>
-            Class = <%= locals.standard %>
-        </p>
+    <div class="container">
+        <h2>Welcome, <%= fullName %>!</h2>
+
+        <!-- Profile Image (with default fallback) -->
+        <img src="<%= profileImageURL || '/images/default-profile.png' %>" alt="Profile Image" class="profile-img">
+
+        <!-- 🔥 Short Attendance Warning -->
+        <% if (shortAttendance) { %>
+            <div class="alert alert-danger">
+                ⚠️ You have short attendance. Kindly talk to your teachers regarding this matter.
+            </div>
+            <% } %>
+
+                <!-- Student Info -->
+                <p><strong>Name:</strong>
+                    <%= fullName %>
+                </p>
+                <p><strong>Father's Name:</strong>
+                    <%= fathersName %>
+                </p>
+                <p><strong>Mother's Name:</strong>
+                    <%= mothersName %>
+                </p>
+                <p><strong>Email:</strong>
+                    <%= email %>
+                </p>
+                <p><strong>Aadhar Number:</strong>
+                    <%= aadharNumber %>
+                </p>
+                <p><strong>Semester:</strong>
+                    <%= semester %>
+                </p>
+                <p><strong>Roll Number:</strong>
+                    <%= rollNumber || "Not Assigned" %>
+                </p>
     </div>
 </body>
 

@@ -54,31 +54,49 @@ router.get("/login", (req, res) => {
 router.get("/forget-password", (req, res) => {
   res.render("forgetPass");
 });
-// router.get("/forget-pswd-verification", (req, res) => {
-//   res.render("forget-pswd-verification");
-// });
-// router.get("/forget-pswd-verification1", (req, res) => {
-//   res.render("forget-pswd-verification1");
-// });
-// router.get("/change-password", (req, res) => {
-//   res.render("change-password");
-// });
+router.get("/forget-pswd-verification", (req, res) => {
+  res.render("forget-pswd-verification");
+});
+router.get("/forget-pswd-verification1", (req, res) => {
+  res.render("forget-pswd-verification1");
+});
+router.get("/change-password", (req, res) => {
+  res.render("change-password");
+});
 router.get("/student-data-form", (req, res) => {
   res.render("student-data");
 })
 router.get("/student-portal", async (req, res) => {
-  const email = req.session.email;
-  const { fullName, fathersName, mothersName, aadharNumber, profileImageURL, standard } = await StudentData.findOne({ email });
-  return res.render("student-portal", {
-    fullName,
-    email,
-    fathersName,
-    mothersName,
-    aadharNumber,
-    standard,
-    profileImageURL,
-  });
-})
+  try {
+    // Ensure user is logged in
+    if (!req.session.email) {
+      return res.status(401).send("Unauthorized: Please login first.");
+    }
+
+    // Fetch student details
+    const student = await StudentData.findOne({ email: req.session.email });
+
+    if (!student) {
+      return res.status(404).send("Student not found.");
+    }
+
+    return res.render("student-portal", {
+      fullName: student.fullName,
+      email: student.email,
+      fathersName: student.fathersName,
+      mothersName: student.mothersName,
+      aadharNumber: student.aadharNumber,
+      semester: student.semester,
+      profileImageURL: student.profileImageURL || "/images/default-profile.png",
+      rollNumber: student.rollNumber || "Not Assigned",
+      shortAttendance: student.shortAttendance, //  For Attendance Warning
+    });
+  } catch (error) {
+    console.error("Error fetching student data:", error);
+    return res.status(500).send("Internal Server Error");
+  }
+});
+
 
 //TO register a new student
 router.post("/register", async (req, res) => {
@@ -86,7 +104,6 @@ router.post("/register", async (req, res) => {
   const student = await StudentReg.findOne({ email });
   if (student) {
     return res
-      .send(400)
       .render("register", { message: "Student already exists" });
   }
 
@@ -204,9 +221,15 @@ router.post("/student-data-form", upload.single("profileImage"), async (req, res
     mothersName,
     aadharNumber,
     profileImageURL,
-    standard,
+    semester,
   } = req.body;
   try {
+    // Check if student already exists
+    const existingStudent = await StudentData.findOne({ email });
+    if (existingStudent) {
+      return res.render("student-data", { message: "Email already exists" });
+    }
+
     await StudentData.create({
       fullName,
       email,
@@ -214,12 +237,14 @@ router.post("/student-data-form", upload.single("profileImage"), async (req, res
       mothersName,
       aadharNumber,
       profileImageURL: `/uploads/${req.file.filename}`,
-      standard,
+      semester,
+      rollApproved: false,
+      shortAttendance: false,
     });
     res.redirect("/");
   } catch (error) {
     console.log(error);
-    res.render("student-data", { message: "Email already exists" })
+    res.render("student-data", { message: "Something went wrong" })
   }
 });
 

@@ -30,9 +30,20 @@ const studentDataSchema = new Schema(
       // default: "/images/default.svg",
     },
 
-    standard: {
+    semester: {
       type: String,
       required: true,
+    },
+    rollNumber: {
+      type: String,
+    },
+    rollApproved: {
+      type: Boolean,
+      default: false,
+    },
+    shortAttendance: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true },
