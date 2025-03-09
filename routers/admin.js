@@ -6,7 +6,6 @@ const StudentData = require("../models/studentData");
 const StudentReg = require("../models/studentReg");
 const AdminSettings = require("../models/adminSettings");
 const Admin = require("../models/admin");
-const { log } = require("console");
 
 const router = Router();
 

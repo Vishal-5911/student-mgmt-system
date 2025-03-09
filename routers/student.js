@@ -51,14 +51,8 @@ router.get("/register", (req, res) => {
 router.get("/login", (req, res) => {
   res.render("login");
 });
-router.get("/forget-password", (req, res) => {
-  res.render("forgetPass");
-});
-router.get("/forget-pswd-verification", (req, res) => {
-  res.render("forget-pswd-verification");
-});
-router.get("/forget-pswd-verification1", (req, res) => {
-  res.render("forget-pswd-verification1");
+router.get("/verify-email", (req, res) => {
+  res.render("verify-email", { message: "", email: "", showOtpInput: false });
 });
 router.get("/change-password", (req, res) => {
   res.render("change-password");
@@ -146,71 +140,173 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+router.post("/verify-email", async (req, res) => {
+  const { email, otp } = req.body;
 
-router.post("/forget-pswd-verification", async (req, res) => {
-  const { email } = req.body;
-  req.session.email = email;
-  const student = await StudentReg.findOne({ email });
-  if (!student) {
-    return res.status(404).render("forget-pswd-verification", {
-      message: "Student Not Found Please check your email",
-    });
-  }
-  const myMail = "learnerpublicschool@gmail.com";
-  const myPass = "wgunmunergfltwvk";
-  try {
-    generateAndSendOTP(email, OTP, myMail, myPass);
-    res.status(200).render("forget-pswd-verification1");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error sending OTP");
-  }
-});
+  if (email && !otp) {
+    req.session.email = email;
+    const student = await StudentReg.findOne({ email });
 
-router.post("/forget-pswd-verification1", async (req, res) => {
-  const { otp } = req.body;
-  const email = req.session.email;
-  console.log(email, otp);
-  const otpRecord = await OTP.findOne({ email: email, otp: otp });
-  console.log(otpRecord);
-  try {
-    if (otpRecord) {
-      res.status(200).render("change-password");
-      const deleteAllOtp = await OTP.deleteMany({});
-    } else {
-      res.status(200).render("otp-verify", {
-        message: "Invalid Otp",
+    if (!student) {
+      return res.status(404).render("verify-email", {
+        message: "Student Not Found! Please check your email.",
+        email: "",
+        showOtpInput: false,
       });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("error verifying otp");
+
+    const myMail = "learnerpublicschool@gmail.com";
+    const myPass = "wgunmunergfltwvk";
+    try {
+      await generateAndSendOTP(email, OTP, myMail, myPass);
+      return res.status(200).render("verify-email", {
+        message: "OTP sent to your email!",
+        email,
+        showOtpInput: true,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("verify-email", {
+        message: "Error sending OTP. Please try again later.",
+        email: "",
+        showOtpInput: false,
+      });
+    }
   }
+
+  if (otp) {
+    const email = req.session.email;
+    console.log(email, otp);
+
+    const otpRecord = await OTP.findOne({ email, otp });
+    console.log(otpRecord);
+
+    try {
+      if (otpRecord) {
+        await OTP.deleteMany({ email }); // Delete OTP after verification
+        return res.status(200).render("change-password");
+      } else {
+        return res.status(200).render("verify-email", {
+          message: "Invalid OTP. Try again.",
+          email,
+          showOtpInput: true,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).render("verify-email", {
+        message: "Error verifying OTP. Please try again.",
+        email: "",
+        showOtpInput: false,
+      });
+    }
+  }
+
+  // Default render case (fix for undefined message)
+  res.render("verify-email", { message: "", email: "", showOtpInput: false });
 });
+
+
+
+// router.post("/forget-pswd-verification", async (req, res) => {
+//   const { email } = req.body;
+//   req.session.email = email;
+//   const student = await StudentReg.findOne({ email });
+//   if (!student) {
+//     return res.status(404).render("forget-pswd-verification", {
+//       message: "Student Not Found Please check your email",
+//     });
+//   }
+//   const myMail = "learnerpublicschool@gmail.com";
+//   const myPass = "wgunmunergfltwvk";
+//   try {
+//     generateAndSendOTP(email, OTP, myMail, myPass);
+//     res.status(200).render("forget-pswd-verification1");
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Error sending OTP");
+//   }
+// });
+
+// router.post("/forget-pswd-verification1", async (req, res) => {
+//   const { otp } = req.body;
+//   const email = req.session.email;
+//   console.log(email, otp);
+//   const otpRecord = await OTP.findOne({ email: email, otp: otp });
+//   console.log(otpRecord);
+//   try {
+//     if (otpRecord) {
+//       res.status(200).render("change-password");
+//       const deleteAllOtp = await OTP.deleteMany({});
+//     } else {
+//       res.status(200).render("otp-verify", {
+//         message: "Invalid Otp",
+//       });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("error verifying otp");
+//   }
+// });
 
 // TO change password if forgoten
 router.post("/change-password", async (req, res) => {
-  const { password, confirmPassword } = req.body;
-  const email = req.session.email;
-  const student = await StudentReg.findOne({ email });
-  // console.log(student.salt);
-  const salt = student.salt;
-  const hashedPassword = createHmac("sha256", salt)
-    .update(password)
-    .digest("hex");
-  if (password === confirmPassword) {
-    const updateStudent = await StudentReg.updateOne(
+  try {
+    const { password, confirmPassword } = req.body;
+    const email = req.session.email;
+
+    // 🔴 Check if email exists in session
+    if (!email) {
+      return res.status(400).render("change-password", {
+        message: "Session expired. Please verify your email again.",
+      });
+    }
+
+    const student = await StudentReg.findOne({ email });
+
+    // 🔴 If student is not found
+    if (!student) {
+      return res.status(404).render("change-password", {
+        message: "Student not found!",
+      });
+    }
+
+    const salt = student.salt;
+
+    // 🔴 Check if passwords match
+    if (password !== confirmPassword) {
+      return res.status(400).render("change-password", {
+        message: "Passwords do not match. Please try again.",
+      });
+    }
+
+    // ✅ Hash the new password
+    const hashedPassword = createHmac("sha256", salt)
+      .update(password)
+      .digest("hex");
+
+    // ✅ Update password in database
+    await StudentReg.updateOne(
       { email: email },
-      { $set: { password: hashedPassword } },
+      { $set: { password: hashedPassword } }
     );
-    // console.log(DBentryStudent);
-  } else {
-    console.log("fail");
-    return res.render("change-password", {
-      message: "Passwords do not match, Please try again",
+
+    // ✅ Clear session email to prevent reusing the verification
+    req.session.email = null;
+
+    // ✅ Redirect to login or show success message
+    return res.status(200).render("login", {
+      message: "Password changed successfully. Please log in.",
+    });
+
+  } catch (error) {
+    console.error("Error changing password:", error);
+    return res.status(500).render("change-password", {
+      message: "Internal server error. Please try again later.",
     });
   }
 });
+
 
 router.post("/student-data-form", upload.single("profileImage"), async (req, res) => {
 

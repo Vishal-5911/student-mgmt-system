@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email</title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div>
+        <h2>Verify Email</h2>
+
+        <% if (message) { %>
+            <p style="color: red;">
+                <%= message %>
+            </p>
+            <% } %>
+
+                <form action="/verify-email" method="POST">
+                    <!-- Email Input -->
+                    <label for="email">Enter your Email:</label>
+                    <input type="email" name="email" id="email" required value="<%= email || '' %>">
+                    <button type="submit">Send OTP</button>
+                </form>
+
+                <% if (showOtpInput) { %>
+                    <!-- OTP Input (Only show when OTP is sent) -->
+                    <form action="/verify-email" method="POST">
+                        <label for="otp">Enter OTP:</label>
+                        <input type="hidden" name="email" value="<%= email %>">
+                        <input type="text" name="otp" id="otp" required>
+                        <button type="submit">Submit</button>
+                    </form>
+                    <% } %>
+
+    </div>
+
+</body>
+
+</html>
