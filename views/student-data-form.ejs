@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Data Form</title>
+  <link href="/css/student-data-form.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="form-container">
+    <h2 class="form-title">Student Data Form</h2>
+
+    <% if (locals.message) { %>
+      <p class="form-message">
+        <%= message %>
+      </p>
+      <% } %>
+
+        <form action="/student-data-form" method="post" enctype="multipart/form-data" class="student-form">
+          <div class="form-group">
+            <label for="fullName" class="form-label">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Enter your Name"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="fathersName" class="form-label">Father's Name:</label>
+            <input type="text" id="fathersName" name="fathersName" class="form-input" placeholder="Father's Name"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label for="mothersName" class="form-label">Mother's Name:</label>
+            <input type="text" id="mothersName" name="mothersName" class="form-input" placeholder="Mother's Name"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label for="semester" class="form-label">Semester:</label>
+            <select id="semester" name="semester" class="form-select" required>
+              <option value="1" selected>1st Semester</option>
+              <option value="2">2nd Semester</option>
+              <option value="3">3rd Semester</option>
+              <option value="4">4th Semester</option>
+              <option value="5">5th Semester</option>
+              <option value="6">6th Semester</option>
+              <option value="PGDCA">PGDCA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="aadharNumber" class="form-label">Aadhar Number:</label>
+            <input type="text" id="aadharNumber" name="aadharNumber" class="form-input"
+              placeholder="Enter your Aadhar Number" />
+          </div>
+
+          <div class="form-group">
+            <label for="profileImage" class="form-label">Profile Image:</label>
+            <input type="file" id="profileImage" name="profileImage" class="form-file" />
+          </div>
+
+          <button type="submit" class="submit-button">Submit</button>
+        </form>
+  </div>
+</body>
+
+</html>

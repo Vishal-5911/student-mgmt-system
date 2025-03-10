@@ -1,0 +1,97 @@
+/* 🔹 General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 🔹 Form Container */
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+/* 🔹 Title */
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 🔹 Messages */
+.form-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Form Groups */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* 🔹 Labels */
+.form-label {
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* 🔹 Input Fields */
+.form-input {
+    width: 93.7%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s ease-in-out;
+}
+
+.form-select {
+    width: 99%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s ease-in-out;
+}
+
+.form-input:focus,
+.form-select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* 🔹 File Upload */
+.form-file {
+    width: 100%;
+    padding: 5px;
+}
+
+/* 🔹 Submit Button */
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}

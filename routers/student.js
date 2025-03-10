@@ -45,11 +45,24 @@ const upload = multer({ storage: storage })
 router.get("/", (req, res) => {
   res.render("home");
 });
-router.get("/register", (req, res) => {
-  res.render("register");
+
+router.get('/syllabus', (req, res) => {
+  res.render('syllabus');
 });
-router.get("/login", (req, res) => {
-  res.render("login");
+
+router.get('/faculty', (req, res) => {
+  res.render('faculty');
+});
+
+router.get('/additional-info', (req, res) => {
+  res.render('additional-info');
+});
+
+router.get("/student-register", (req, res) => {
+  res.render("student-register");
+});
+router.get("/student-login", (req, res) => {
+  res.render("student-login");
 });
 router.get("/verify-email", (req, res) => {
   res.render("verify-email", { message: "", email: "", showOtpInput: false });
@@ -58,7 +71,7 @@ router.get("/change-password", (req, res) => {
   res.render("change-password");
 });
 router.get("/student-data-form", (req, res) => {
-  res.render("student-data");
+  res.render("student-data-form");
 })
 router.get("/student-portal", async (req, res) => {
   try {
@@ -93,12 +106,12 @@ router.get("/student-portal", async (req, res) => {
 
 
 //TO register a new student
-router.post("/register", async (req, res) => {
+router.post("/student-register", async (req, res) => {
   const { email, password, fullName } = req.body;
   const student = await StudentReg.findOne({ email });
   if (student) {
     return res
-      .render("register", { message: "Student already exists" });
+      .render("student-register", { message: "Student already exists" });
   }
 
   console.log(req.body);
@@ -108,15 +121,15 @@ router.post("/register", async (req, res) => {
       email,
       password,
     });
-    res.redirect("/login");
+    res.redirect("/student-login");
   } catch (error) {
     console.log(error);
-    return res.render("register", { message: "Something went wrong" });
+    return res.render("student-register", { message: "Something went wrong" });
   }
 });
 
 //To login an already existing student
-router.post("/login", async (req, res) => {
+router.post("/student-login", async (req, res) => {
   const { email, password } = req.body;
 
 
@@ -135,7 +148,7 @@ router.post("/login", async (req, res) => {
 
     return res.cookie("token", token).redirect("/student-portal");
   } catch (error) {
-    return res.render("login", {
+    return res.render("student-login", {
       error: "Incorrect Email or Password",
     });
   }
@@ -145,7 +158,7 @@ router.post("/verify-email", async (req, res) => {
 
   if (email && !otp) {
     req.session.email = email;
-    const student = await StudentReg.findOne({ email });
+    const student = await StudentData.findOne({ email });
 
     if (!student) {
       return res.status(404).render("verify-email", {
@@ -295,7 +308,7 @@ router.post("/change-password", async (req, res) => {
     req.session.email = null;
 
     // ✅ Redirect to login or show success message
-    return res.status(200).render("login", {
+    return res.status(200).render("student-login", {
       message: "Password changed successfully. Please log in.",
     });
 
@@ -323,7 +336,7 @@ router.post("/student-data-form", upload.single("profileImage"), async (req, res
     // Check if student already exists
     const existingStudent = await StudentData.findOne({ email });
     if (existingStudent) {
-      return res.render("student-data", { message: "Email already exists" });
+      return res.render("student-data-form", { message: "Email already exists" });
     }
 
     await StudentData.create({
@@ -340,7 +353,7 @@ router.post("/student-data-form", upload.single("profileImage"), async (req, res
     res.redirect("/");
   } catch (error) {
     console.log(error);
-    res.render("student-data", { message: "Something went wrong" })
+    res.render("student-data-form", { message: "Something went wrong" })
   }
 });
 

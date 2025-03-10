@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus</title>
+    <link rel="stylesheet" href="/css/syllabus.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- 🔹 Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="/faculty">Department & Faculty</a></li>
+            <li><a href="/additional-info">Additional Info</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main class="content">
+            <h1>Syllabus</h1>
+
+            <!-- 🔹 Dropdown for Semesters -->
+            <div class="dropdown">
+                <button class="dropdown-button" onclick="toggleDropdown()">Select Semester</button>
+                <ul class="dropdown-menu" id="dropdown-menu">
+                    <% for(let sem in syllabus) { %>
+                        <li onclick="showSemester('<%= sem %>')">Semester <%= sem %>
+                        </li>
+                        <% } %>
+                </ul>
+            </div>
+
+            <!-- 🔹 Syllabus Content -->
+            <div id="syllabus-content">
+                <% for(let sem in syllabus) { %>
+                    <div class="semester" id="sem<%= sem %>" style="display: <%= sem === '1' ? 'block' : 'none' %>;">
+                        <h2>Semester <%= sem %>
+                        </h2>
+                        <ul>
+                            <% syllabus[sem].forEach(subject=> { %>
+                                <li><strong>
+                                        <%= subject.code %>
+                                    </strong> - <%= subject.subject %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    </div>
+                    <% } %>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            let menu = document.getElementById("dropdown-menu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        function showSemester(sem) {
+            document.querySelectorAll(".semester").forEach(div => div.style.display = "none");
+            document.getElementById("sem" + sem).style.display = "block";
+            document.getElementById("dropdown-menu").style.display = "none"; // Hide dropdown after selection
+        }
+    </script>
+
+</body>
+
+</html>

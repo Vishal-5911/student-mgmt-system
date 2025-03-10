@@ -6,17 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Edit <%= field %>
     </title>
-    <link href="/css/style.css" rel="stylesheet" />
-
+    <link href="/css/edit-student-profile-data.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h2>Edit <%= field %>
-    </h2>
-    <form action="/edit/<%= student._id %>/<%= field %>" method="POST">
-        <input type="text" name="newValue" placeholder="Enter new <%= field %>" required>
-        <button type="submit">Update</button>
-    </form>
+    <div class="edit-container">
+        <h2 class="edit-title">Edit <%= field %>
+        </h2>
+
+        <form action="/edit/<%= student._id %>/<%= field %>" method="POST" class="edit-form">
+            <label for="newValue" class="input-label">Enter new <%= field %>:</label>
+            <input type="text" id="newValue" name="newValue" class="edit-input" placeholder="Enter new <%= field %>"
+                required>
+            <button type="submit" class="update-button">Update</button>
+        </form>
+
+        <a href="/student/<%= student._id %>" class="back-link">Back to Profile</a>
+    </div>
+
     <script src="/js/script.js"></script>
 </body>
 

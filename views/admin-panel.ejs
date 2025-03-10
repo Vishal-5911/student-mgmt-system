@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Panel</title>
-    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/admin-panel.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script>
         function applySorting() {
             const sortBy = document.getElementById("sortBy").value;
@@ -19,21 +20,29 @@
             window.location.href = `/admin-panel?search=${query}&semester=${semester}`;
         }
 
-
         function filterBySemester() {
-            const semester = document.getElementById('semesterFilter').value;
+            const semester = document.getElementById("semesterFilter").value;
             const url = new URL(window.location.href);
             if (semester) {
-                url.searchParams.set('semester', semester); // Set semester filter
+                url.searchParams.set("semester", semester);
             } else {
-                url.searchParams.delete('semester'); // Remove filter if "All Semesters" is selected
+                url.searchParams.delete("semester");
             }
             window.location.href = url.toString();
         }
-        function filterShortAttendance() {
-            const semester = document.getElementById("semesterFilter").value;
-            window.location.href = `/admin-panel?shortAttendanceFilter=true&semester=${semester}`;
+
+        function toggleShortAttendanceFilter() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.get("shortAttendanceFilter") === "true") {
+                urlParams.delete("shortAttendanceFilter"); // Remove filter
+            } else {
+                urlParams.set("shortAttendanceFilter", "true"); // Apply filter
+            }
+
+            window.location.search = urlParams.toString(); // Reload with new query
         }
+
 
         function toggleShortAttendance(studentId) {
             fetch(`/toggle-attendance/${studentId}`, { method: "POST" })
@@ -77,80 +86,91 @@
 
 <body>
     <!-- Navigation Bar -->
-    <nav>
-        <h2>Admin Panel</h2>
+    <nav id="admin-nav">
+        <h2 id="admin-title">Admin Panel</h2>
 
-        <!-- Semester Filter Dropdown -->
-        <select id="semesterFilter" onchange="filterBySemester()">
-            <option value="">All Semesters</option>
-            <option value="1" <% if (selectedSemester==='1' ) { %> selected <% } %>>1st Semester</option>
-            <option value="2" <% if (selectedSemester==='2' ) { %> selected <% } %>>2nd Semester</option>
-            <option value="3" <% if (selectedSemester==='3' ) { %> selected <% } %>>3rd Semester</option>
-            <option value="4" <% if (selectedSemester==='4' ) { %> selected <% } %>>4th Semester</option>
-            <option value="5" <% if (selectedSemester==='5' ) { %> selected <% } %>>5th Semester</option>
-            <option value="6" <% if (selectedSemester==='6' ) { %> selected <% } %>>6th Semester</option>
-            <option value="PGDCA" <% if (selectedSemester==='PGDCA' ) { %> selected <% } %>>PGDCA</option>
-        </select>
+        <!-- Filters and Sorting -->
+        <div id="filters-container">
+            <select id="semesterFilter" class="filter-dropdown" onchange="filterBySemester()">
+                <option value="">All Semesters</option>
+                <option value="1" <% if (selectedSemester==='1' ) { %> selected <% } %>>1st Semester</option>
+                <option value="2" <% if (selectedSemester==='2' ) { %> selected <% } %>>2nd Semester</option>
+                <option value="3" <% if (selectedSemester==='3' ) { %> selected <% } %>>3rd Semester</option>
+                <option value="4" <% if (selectedSemester==='4' ) { %> selected <% } %>>4th Semester</option>
+                <option value="5" <% if (selectedSemester==='5' ) { %> selected <% } %>>5th Semester</option>
+                <option value="6" <% if (selectedSemester==='6' ) { %> selected <% } %>>6th Semester</option>
+                <option value="PGDCA" <% if (selectedSemester==='PGDCA' ) { %> selected <% } %>>PGDCA</option>
+            </select>
 
-        <select id="sortBy" onchange="applySorting()">
-            <option value="">Sort By</option>
-            <option value="fullName">Name</option>
-            <option value="semester">Semester</option>
-        </select>
+            <select id="sortBy" class="filter-dropdown" onchange="applySorting()">
+                <option value="">Sort By</option>
+                <option value="fullName">Name</option>
+                <option value="semester">Semester</option>
+            </select>
 
-        <input type="text" id="searchQuery" placeholder="Search Student...">
-        <button onclick="searchStudent()">Search</button>
-        <button onclick="filterShortAttendance()">Filter Short Attendance</button>
+            <input type="text" id="searchQuery" class="search-box" placeholder="Search Student...">
+            <button class="btn" onclick="searchStudent()">Search</button>
 
-        <!-- Roll Number Toggle -->
-        <button onclick="toggleRollAssignment()">
-            <% if (rollNumberAssignment) { %>
-                Disable Roll Number Assignment
-                <% } else { %>
-                    Enable Roll Number Assignment
-                    <% } %>
-        </button>
+            <!-- Toggle Short Attendance Filter -->
+            <button id="shortAttendanceBtn" class="btn btn-warning" onclick="toggleShortAttendanceFilter()">
+                <% if (shortAttendanceFilter) { %> Show All Students <% } else { %> Filter Short Attendance <% } %>
+            </button>
+
+            <!-- Roll Number Toggle -->
+            <button class="btn btn-toggle" onclick="toggleRollAssignment()">
+                <% if (rollNumberAssignment) { %> Disable Roll Number Assignment <% } else { %> Enable Roll Number
+                        Assignment <% } %>
+            </button>
+        </div>
     </nav>
 
     <!-- Students Table -->
-    <table border="1">
-        <tr>
-            <th>Profile</th>
-            <th>Full Name</th>
-            <th>Semester</th>
-            <th>Roll Number</th>
-            <th>Short Attendance</th>
-            <th>Actions</th>
-        </tr>
-        <% students.forEach(student=> { %>
-            <tr>
-                <td><img src="<%= student.profileImageURL %>" alt="Profile" width="50"></td>
-                <td>
-                    <%= student.fullName %>
-                </td>
-                <td>
-                    <%= student.semester %>
-                </td>
-                <td>
-                    <% if (student.rollNumber) { %>
-                        <%= student.rollNumber %>
-                            <% } else { %>
-                                Not Assigned
-                                <% } %>
-                </td>
-                <td>
-                    <button onclick="toggleShortAttendance('<%= student._id %>')">
-                        <%= student.shortAttendance ? 'No' : 'Yes' %>
-                    </button>
-                </td>
-                <td>
-                    <a href="/student/<%= student._id %>">Edit</a>
-                    <button
-                        onclick="confirmDelete('<%= student._id %>', '<%= student.fullName %>', '<%= student.semester %>')">Delete</button>
-                </td>
-            </tr>
-            <% }); %>
-    </table>
+    <div id="table-container">
+        <table id="students-table">
+            <thead>
+                <tr>
+                    <th>Profile</th>
+                    <th>Full Name</th>
+                    <th>Semester</th>
+                    <th>Roll Number</th>
+                    <th>Short Attendance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% students.forEach(student=> { %>
+                    <tr class="student-row">
+                        <td><img src="<%= student.profileImageURL %>" alt="Profile" class="profile-img"></td>
+                        <td>
+                            <%= student.fullName %>
+                        </td>
+                        <td>
+                            <%= student.semester %>
+                        </td>
+                        <td>
+                            <% if (student.rollNumber) { %>
+                                <%= student.rollNumber %>
+                                    <% } else { %>
+                                        Not Assigned
+                                        <% } %>
+                        </td>
+                        <td>
+                            <button class="btn btn-attendance" onclick="toggleShortAttendance('<%= student._id %>')">
+                                <%= student.shortAttendance ? 'No' : 'Yes' %>
+                            </button>
+                        </td>
+                        <td>
+                            <a class="btn btn-edit" href="/student/<%= student._id %>">Edit</a>
+                            <button class="btn btn-delete"
+                                onclick="confirmDelete('<%= student._id %>', '<%= student.fullName %>', '<%= student.semester %>')">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
 
     <script src="/js/script.js"></script>
 </body>

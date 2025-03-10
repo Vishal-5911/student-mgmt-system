@@ -5,21 +5,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Edit Profile Picture</title>
-    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/edit-student-profile-image.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h2>Edit Profile Picture</h2>
-    <img src="<%= student.profileImageURL %>" alt="Current Profile" width="150"><br><br>
+    <div class="profile-edit-container">
+        <h2 class="profile-edit-title">Update Profile Picture</h2>
 
-    <form action="/edit-profile/<%= student._id %>" method="POST" enctype="multipart/form-data">
-        <input type="file" name="profileImage" accept="image/*" required>
-        <button type="submit">Upload</button>
-    </form>
+        <div class="profile-image-preview">
+            <img src="<%= student.profileImageURL %>" alt="Current Profile" id="profilePreview">
+        </div>
 
-    <br>
-    <a href="/student/<%= student._id %>">Back to Student Details</a>
-    <script src="/js/script.js"></script>
+        <form action="/edit-profile/<%= student._id %>" method="POST" enctype="multipart/form-data"
+            class="profile-edit-form">
+            <label for="profileImage" class="file-upload-label">Choose a new profile picture</label>
+            <input type="file" id="profileImage" name="profileImage" accept="image/*" required
+                onchange="previewImage(event)">
+
+            <button type="submit" class="upload-button">Upload</button>
+        </form>
+
+        <a href="/student/<%= student._id %>" class="back-link">Back to Student Details</a>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('profilePreview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </body>
 
 </html>

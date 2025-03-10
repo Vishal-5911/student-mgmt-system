@@ -5,29 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin-login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
+    <div class="login-container">
         <h2>Admin Login</h2>
 
         <% if (locals.error) { %>
-            <p class="error">
+            <p class="error-message">
                 <%= error %>
             </p>
             <% } %>
 
-                <form action="/admin-login" method="POST">
-                    <label for="adminID">Admin ID:</label>
-                    <input type="text" id="adminID" name="adminID" required>
+                <form action="/admin-login" method="POST" class="login-form">
+                    <div class="input-group">
+                        <label for="adminID">Admin ID:</label>
+                        <input type="text" id="adminID" name="adminID" required>
+                    </div>
 
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="input-group password-group">
+                        <label for="password">Password:</label>
+                        <div class="password-container">
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+                        </div>
+                    </div>
 
-                    <button type="submit">Login</button>
+                    <button type="submit" class="login-button">Login</button>
+
+                    <div class="links">
+                        <a href="/" class="go-home">Go Back to Home</a>
+                    </div>
                 </form>
     </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("password");
+            const toggleBtn = document.querySelector(".toggle-password");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleBtn.textContent = "Hide";
+            } else {
+                passwordInput.type = "password";
+                toggleBtn.textContent = "Show";
+            }
+        }
+    </script>
 </body>
 
 </html>

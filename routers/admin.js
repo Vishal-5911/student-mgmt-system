@@ -88,6 +88,7 @@ router.get('/admin-panel', async (req, res) => {
         let query = {};
         let sortOption = {};
         let selectedSemester = req.query.semester || "";
+        let shortAttendanceFilter = req.query.shortAttendanceFilter === "true"; // Ensure correct boolean handling
 
         //  Semester Filtering Fix
         if (req.query.semester) {
@@ -108,7 +109,6 @@ router.get('/admin-panel', async (req, res) => {
             };
         }
 
-
         // Sorting Functionality
         if (req.query.sort) {
             sortOption[req.query.sort] = 1; // Sort in ascending order
@@ -116,8 +116,8 @@ router.get('/admin-panel', async (req, res) => {
             sortOption["semester"] = 1; // Default sorting by semester
         }
 
-        // Filter Short Attendance
-        if (req.query.shortAttendanceFilter) {
+        // ✅ Filter Short Attendance
+        if (shortAttendanceFilter) {
             query.shortAttendance = true;
         }
 
@@ -126,7 +126,6 @@ router.get('/admin-panel', async (req, res) => {
 
         const rollNumberAssignment = settings ? settings.rollNumberAssignment : false;
 
-
         // Ensure profile images exist, add a default if missing
         students.forEach(student => {
             if (!student.profileImageURL) {
@@ -134,12 +133,20 @@ router.get('/admin-panel', async (req, res) => {
             }
         });
 
-        res.render('admin-panel', { students, rollNumberAssignment: settings.rollNumberAssignment, selectedSemester });
+        // ✅ Pass shortAttendanceFilter to EJS
+        res.render('admin-panel', {
+            students,
+            rollNumberAssignment: settings.rollNumberAssignment,
+            selectedSemester,
+            shortAttendanceFilter // ✅ Now available in EJS
+        });
+
     } catch (error) {
         console.error(error);
         res.status(500).send('Error fetching students');
     }
 });
+
 
 
 router.get('/student/:id', async (req, res) => {

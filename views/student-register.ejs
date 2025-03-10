@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Register</title>
+  <link href="/css/student-register.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="register-container">
+    <% if (locals.message) { %>
+      <p class="message">
+        <%= message %>
+      </p>
+      <% } %>
+
+        <form action="/student-register" method="post" class="register-form">
+          <div class="input-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your Name" required />
+          </div>
+
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          </div>
+
+          <div class="input-group password-group">
+            <label for="password">Password</label>
+            <div class="password-container">
+              <input type="password" id="password" name="password" placeholder="Enter your password" required />
+              <button type="button" class="toggle-password" onclick="togglePassword()">Show</button>
+            </div>
+          </div>
+
+          <button type="submit" class="register-button">Submit</button>
+        </form>
+
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      const toggleBtn = document.querySelector(".toggle-password");
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleBtn.textContent = "Hide"; // Change to "Hide"
+      } else {
+        passwordInput.type = "password";
+        toggleBtn.textContent = "Show"; // Change back to "Show"
+      }
+    }
+  </script>
+</body>
+
+</html>

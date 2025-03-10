@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Information</title>
+    <link rel="stylesheet" href="/css/additional-info.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script defer src="/js/additional-info.js"></script>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="/faculty">Department & Faculty</a></li>
+            <li><a href="/syllabus">Syllabus</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main class="content">
+            <h1>Additional Learning Resources</h1>
+
+            <!-- Dropdown to Select a Topic -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown()">Select a Topic</button>
+                <div class="dropdown-content" id="topicDropdown">
+                    <% additionalInfo.forEach((info, index)=> { %>
+                        <a href="#" onclick="showTopic('<%= index %>')">
+                            <%= info.topic %>
+                        </a>
+                        <% }) %>
+                </div>
+            </div>
+
+            <!-- Default Section -->
+            <div class="topic-section" id="default-section">
+                <h2>Why You Need to Learn More than the Syllabus</h2>
+                <p>Learning beyond the syllabus helps you stay updated with industry trends, develop critical thinking,
+                    and improve problem-solving skills. Exploring extra resources like online courses, articles, and
+                    tutorials enhances your knowledge and makes you job-ready.</p>
+            </div>
+
+            <!-- Dynamic Topic Sections -->
+            <% additionalInfo.forEach((info, index)=> { %>
+                <div class="topic-section" id="topic-<%= index %>" style="display: none;">
+                    <h2>
+                        <%= info.topic %>
+                    </h2>
+                    <p>
+                        <%= info.definition %>
+                    </p>
+                    <a href="<%= info.link %>" target="_blank">Watch Video</a> |
+                    <a href="<%= info.article %>" target="_blank">Read Article</a>
+                </div>
+                <% }) %>
+        </main>
+    </div>
+</body>
+
+</html>
