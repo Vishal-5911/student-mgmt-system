@@ -2,19 +2,67 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title></title>
-  <link href="/css/style.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department of BCA & PGDCA</title>
+  <link href="/css/home.css" rel="stylesheet">
+  <script defer src="/js/gallery.js"></script>
 </head>
 
 <body>
-  <a href="./login">Signin</a>
-  <a href="./register">Register</a>
-  <a href="./admin-register">Admin Register</a>
-  <a href="./admin-login">Admin Login</a>
-  <script src="/js/script.js"></script>
+
+
+  <!-- 🔹 Navbar (No Scroll, Fits Screen) -->
+  <nav class="navbar">
+    <div class="logo">Dept. of BCA & PGDCA</div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/faculty">Faculty</a></li>
+      <li><a href="/faculty">Department</a></li>
+      <li><a href="/syllabus">Syllabus</a></li>
+      <li><a href="/additional-info">Additional Info</a></li>
+    </ul>
+  </nav>
+
+  <!-- 🔹 Title Bar -->
+  <div class="title-bar">
+    <h1>Department of BCA & PGDCA</h1>
+  </div>
+
+  <!-- 🔹 Photo Gallery Section -->
+  <section class="gallery">
+    <h2> Photo Gallery</h2>
+    <div class="gallery-container">
+      <img src="/images/photo1.jpg" alt="Event 1">
+      <img src="/images/photo2.jpg" alt="Event 2">
+      <img src="/images/photo3.jpg" alt="Event 3">
+      <!-- <img src="/images/photo4.jpg" alt="Event 4"> -->
+    </div>
+    <div class="gallery-buttons">
+      <button id="prev">⬅️</button>
+      <button id="next">➡️</button>
+    </div>
+  </section>
+
+  <!-- 🔹 Message from HOD -->
+  <section class="hod-message">
+    <h2>📜 Message from HOD</h2>
+    <p>Welcome to the Department of BCA & PGDCA. Our department is committed to providing quality education and
+      fostering an environment where students can excel in technology and research. We encourage students to engage in
+      hands-on learning and explore their potential.</p>
+    <p><strong>- Prof. Tej Singh (Head of Department)</strong></p>
+  </section>
+
+  <!-- 🔹 Footer -->
+  <footer class="footer">
+    <!-- <div class="footer-links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms & Conditions</a>
+      <a href="/contact">Contact Us</a>
+    </div> -->
+    <p>&copy; 2025 Department of BCA & PGDCA, Government College Bilaspur</p>
+  </footer>
+
 </body>
 
 </html>

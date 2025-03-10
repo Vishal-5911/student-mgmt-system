@@ -1,0 +1,71 @@
+/* 🔹 General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 🔹 Container */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+}
+
+/* 🔹 Title */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 🔹 Table */
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* 🔹 Table Labels */
+.table-label {
+    font-weight: 600;
+    text-align: left;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+}
+
+/* 🔹 Table Data */
+.table-data {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    /* Moves text to the left and "Edit" to the right */
+    align-items: center;
+    border: 1px solid #ddd;
+}
+
+/* 🔹 Profile Image */
+.profile-image {
+    width: 100px;
+    border-radius: 5px;
+}
+
+/* 🔹 Edit Links */
+.edit-link {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.edit-link:hover {
+    color: #0056b3;
+}

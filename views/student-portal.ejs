@@ -5,45 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Portal</title>
-    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/student-portal.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
-        <h2>Welcome, <%= fullName %>!</h2>
+        <h2 class="title">Welcome, <%= fullName %>!</h2>
 
         <!-- Profile Image (with default fallback) -->
-        <img src="<%= profileImageURL || '/images/default-profile.png' %>" alt="Profile Image" class="profile-img">
+        <div class="profile-container">
+            <img src="<%= profileImageURL || '/images/default-profile.png' %>" alt="Profile Image" class="profile-img">
+        </div>
 
         <!-- 🔥 Short Attendance Warning -->
         <% if (shortAttendance) { %>
-            <div class="alert alert-danger">
+            <div class="alert">
                 ⚠️ You have short attendance. Kindly talk to your teachers regarding this matter.
             </div>
             <% } %>
 
-                <!-- Student Info -->
-                <p><strong>Name:</strong>
-                    <%= fullName %>
-                </p>
-                <p><strong>Father's Name:</strong>
-                    <%= fathersName %>
-                </p>
-                <p><strong>Mother's Name:</strong>
-                    <%= mothersName %>
-                </p>
-                <p><strong>Email:</strong>
-                    <%= email %>
-                </p>
-                <p><strong>Aadhar Number:</strong>
-                    <%= aadharNumber %>
-                </p>
-                <p><strong>Semester:</strong>
-                    <%= semester %>
-                </p>
-                <p><strong>Roll Number:</strong>
-                    <%= rollNumber || "Not Assigned" %>
-                </p>
+                <!-- Student Info Section -->
+                <div class="student-info">
+                    <p><strong>Name:</strong>
+                        <%= fullName %>
+                    </p>
+                    <p><strong>Father's Name:</strong>
+                        <%= fathersName %>
+                    </p>
+                    <p><strong>Mother's Name:</strong>
+                        <%= mothersName %>
+                    </p>
+                    <p><strong>Email:</strong>
+                        <%= email %>
+                    </p>
+                    <p><strong>Aadhar Number:</strong>
+                        <%= aadharNumber %>
+                    </p>
+                    <p><strong>Semester:</strong>
+                        <%= semester %>
+                    </p>
+                    <p><strong>Roll Number:</strong>
+                        <%= rollNumber || "Not Assigned" %>
+                    </p>
+                </div>
     </div>
 </body>
 

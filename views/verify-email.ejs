@@ -5,29 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Email</title>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/verify-email.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <div>
-        <h2>Verify Email</h2>
+    <div class="container">
+        <h2 class="title">Verify Email</h2>
 
         <% if (message) { %>
-            <p style="color: red;">
+            <p class="error-message">
                 <%= message %>
             </p>
             <% } %>
 
-                <form action="/verify-email" method="POST">
-                    <!-- Email Input -->
+                <form action="/verify-email" method="POST" class="email-form">
                     <label for="email">Enter your Email:</label>
-                    <input type="email" name="email" id="email" required value="<%= email || '' %>">
-                    <button type="submit">Send OTP</button>
+                    <div class="email-input-container">
+                        <input type="email" name="email" id="email" required value="<%= email || '' %>">
+                        <button type="submit" class="send-otp-btn">OTP</button>
+                    </div>
                 </form>
 
                 <% if (showOtpInput) { %>
-                    <!-- OTP Input (Only show when OTP is sent) -->
                     <form action="/verify-email" method="POST">
                         <label for="otp">Enter OTP:</label>
                         <input type="hidden" name="email" value="<%= email %>">

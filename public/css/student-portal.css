@@ -1,0 +1,85 @@
+/* 🔹 General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 🔹 Container */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+}
+
+/* 🔹 Title */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 🔹 Profile Image */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+}
+
+/* 🔹 Short Attendance Alert */
+.alert {
+    background-color: #ffcccc;
+    color: #b30000;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* 🔹 Student Info */
+.student-info {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.student-info p {
+    font-size: 16px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .student-info p {
+        font-size: 14px;
+    }
+}
