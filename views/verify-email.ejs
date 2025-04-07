@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Email</title>
-    <link href="/css/verify-email.css" rel="stylesheet">
+    <link href="css/verify-email.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -18,24 +18,24 @@
             <p class="error-message">
                 <%= message %>
             </p>
-            <% } %>
+        <% } %>
 
-                <form action="/verify-email" method="POST" class="email-form">
-                    <label for="email">Enter your Email:</label>
-                    <div class="email-input-container">
-                        <input type="email" name="email" id="email" required value="<%= email || '' %>">
-                        <button type="submit" class="send-otp-btn">OTP</button>
-                    </div>
+            <form action="/verify-email" method="POST" class="email-form">
+                <label for="email">Enter your Email:</label>
+                <div class="email-input-container">
+                    <input type="email" name="email" id="email" required value="<%= email || '' %>">
+                    <button type="submit" class="send-otp-btn">OTP</button>
+                </div>
+            </form>
+
+        <% if (showOtpInput) { %>
+                <form action="/verify-email" method="POST">
+                    <label for="otp">Enter OTP:</label>
+                    <input type="hidden" name="email" value="<%= email %>" >
+                    <input type="text" name="otp" id="otp" required>
+                    <button type="submit">Submit</button>
                 </form>
-
-                <% if (showOtpInput) { %>
-                    <form action="/verify-email" method="POST">
-                        <label for="otp">Enter OTP:</label>
-                        <input type="hidden" name="email" value="<%= email %>">
-                        <input type="text" name="otp" id="otp" required>
-                        <button type="submit">Submit</button>
-                    </form>
-                    <% } %>
+        <% } %>
 
     </div>
 

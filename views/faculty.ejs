@@ -13,10 +13,15 @@
 
     <!-- 🔹 Navbar -->
     <nav class="navbar">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/syllabus">Syllabus</a></li>
-            <li><a href="/additional-info">Additional Info</a></li>
+        <div class="logo">
+            <img src="images/bca.png" alt="UsabilityHub Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="./">Home</a></li>
+            <li><a href="./faculty">Faculty</a></li>
+            <li><a href="./syllabus">Syllabus</a></li>
+            <li><a href="./additional-info">Study Material</a></li>
+            <li><a href="#">About Us</a></li>
         </ul>
     </nav>
 
@@ -53,14 +58,52 @@
                         <p><strong>Qualification:</strong>
                             <%= member.qualification %>
                         </p>
-                        <p><strong>Expertise:</strong>
-                            <%= member.expertise %>
-                        </p>
+                    
                     </div>
                     <% }) %>
             </div>
         </section>
     </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="#">Anti Ragging</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Meritlist</a></li>
+                    <li><a href="#">Facilities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>LATEST EVENTS</h3>
+                <p>Annual Prize Distribution Function Session 2023-24</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>USEFUL LINKS</h3>
+                <ul>
+                    <li><a href="#">RTI</a></li>
+                    <li><a href="#">NAAC</a></li>
+                    <li><a href="#">IGNOU Center</a></li>
+                    <li><a href="#">HPU CS</a></li>
+                    <li><a href="#">HPU</a></li>
+                    <li><a href="#">HP Tech</a></li>
+                    <li><a href="#">CUHP</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>CONTACT US</h3>
+                <p><strong>Email:</strong> principalpgpgbilaspur@gmail.com</p>
+                <p><strong>Phone No:</strong> 01978222417</p>
+                <div class="map">
+                    <div style="width: 100%"><iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q=GPGC%20bilaspur%20Himachal%20Pradesh%20India+(Gpgc%20Bilaspur)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/collections/drones/">drones ireland</a></iframe>
+                </div>
+            </div>
+        </div>
 
     <!-- 🔹 JavaScript for Slider -->
     <script>

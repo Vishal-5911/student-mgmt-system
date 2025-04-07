@@ -114,7 +114,7 @@ router.post("/student-register", async (req, res) => {
       .render("student-register", { message: "Student already exists" });
   }
 
-  console.log(req.body);
+  console.log(email,password,fullName);
   try {
     await StudentReg.create({
       fullName,
@@ -155,9 +155,9 @@ router.post("/student-login", async (req, res) => {
 });
 router.post("/verify-email", async (req, res) => {
   const { email, otp } = req.body;
-
+  req.session.email = email;
   if (email && !otp) {
-    req.session.email = email;
+
     const student = await StudentData.findOne({ email });
 
     if (!student) {
@@ -267,6 +267,7 @@ router.post("/change-password", async (req, res) => {
   try {
     const { password, confirmPassword } = req.body;
     const email = req.session.email;
+console.log(email);
 
     // 🔴 Check if email exists in session
     if (!email) {
@@ -275,7 +276,9 @@ router.post("/change-password", async (req, res) => {
       });
     }
 
-    const student = await StudentReg.findOne({ email });
+    const student = await StudentReg.findOne({ email:email });
+
+console.log(student);
 
     // 🔴 If student is not found
     if (!student) {

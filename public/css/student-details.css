@@ -1,12 +1,33 @@
+:root {
+    --white: #fff;
+    --blue: #0073e6c4;
+    --darkBlue: #005bb5;
+    --lightBlue: #e3f2fd;
+    --black: #333;
+    --gray: #777;
+    --shadow: rgba(0, 115, 230, 0.3);
+    --borderColor: #ccc;
+    --bgColor: #e4f4ff;
+    --inputBg: #f8f8f8;
+    --btnBg: #0073e6c4;
+    --btnHover: #005bb5;
+}
 /* 🔹 General Styles */
 body {
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif;
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    margin: 0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bgColor);
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* 🔹 Container */
@@ -14,7 +35,7 @@ body {
     background: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px var(--blue);
     width: 500px;
     text-align: center;
 }

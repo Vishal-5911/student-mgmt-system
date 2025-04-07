@@ -1,72 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Department of BCA & PGDCA</title>
-  <link href="/css/home.css" rel="stylesheet">
-  <script defer src="/js/gallery.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department of BCA&PGDCA</title>
+    <link rel="stylesheet" href="css/home.css">
 </head>
-
 <body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/bca.png" alt="UsabilityHub Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="./home">Home</a></li>
+            <li><a href="./faculty">Faculty</a></li>
+            <li><a href="./syllabus">Syllabus</a></li>
+            <li><a href="./additional-info">Study Material</a></li>
+            <li><a href="https://gcbilaspur.in/gallery/7">Gallery</a></li>
+        </ul>
+        <div class="buttons">
+            <a href="student-login"><button class="signin">Sign in</button></a>
+            <a href="student-register"><button class="signup">Sign up</button></a>
+        </div>
+    </nav>
 
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Bachelor of Computer Applications program:</h1>
+            <p> "Empowering innovation and excellence, the Bachelor of Computer Applications program fosters skilled IT professionals, equipped to drive technological advancements and transform the digital landscape."</p>
+            <button class="get-started" ><a href="./faculty" style="text-decoration: none; color: white;" >Get Started</a></button>
+        </div>
+        <div class="hero-image">
+            <img src="" alt="Illustration"> 
+        </div>
+        <div class="slider-container">
+            <div class="slides">
+                <div class="slide"><img src="images/5.jpg" alt="Slide 1"></div>
+                <div class="slide"><img src="images/photo2.jpg" alt="Slide 2"></div>
+                <div class="slide"><img src="images/photo3.jpg" alt="Slide 3"></div>
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+    </header><br><br><br><br><br><br>
+    <div class="container">
+        <div class="text">
+            <h1>From HOD's Desk</h1>
+            <p>As the Head of BCA and PGDCA Department, I am privileged to lead a team of dynamic faculty and aspiring students. Our department is committed to providing a strong foundation in computer science, IT, and application development. We believe in creating a learning environment that not only imparts theoretical knowledge but also hones practical skills. Through regular workshops, seminars, projects, and industry interactions, we ensure our students are equipped for real-world challenges. Innovation, critical thinking, and ethical responsibility are central to our teaching approach. Our curriculum is designed to match industry trends, helping students stay ahead in the tech-driven world. We focus on all-round development, encouraging participation in technical, cultural, and co-curricular activities. Faculty members act as mentors, guiding students toward academic success and career growth. I encourage every student to make full use of the opportunities offered and take charge of their own learning journey. Together, let us build a future that is not only technologically advanced but also socially responsible and impactful. I wish all our students success, knowledge, and a fulfilling academic experience.</p>
+            <p><strong>Dr. Tej singh</strong><br>Head of the Department</p>
+        </div>
+        <div class="image">
+            <img src="images/hod.jpg" alt="HOD Photo">
+        </div>
+    </div><br><br><br>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="https://gcbilaspur.in/anti-ragging%20Cell">Anti Ragging</a></li>
+                    <li><a href="https://gcbilaspur.in/photo-gallery">Gallery</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Meritlist</a></li>
+                    <li><a href="#">Facilities</a></li>
+                </ul>
+            </div>
 
-  <!-- 🔹 Navbar (No Scroll, Fits Screen) -->
-  <nav class="navbar">
-    <div class="logo">Dept. of BCA & PGDCA</div>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/faculty">Faculty</a></li>
-      <li><a href="/student-login">Student Login</a></li>
-      <li><a href="/admin-login">Admin Login</a></li>
-      <li><a href="/faculty">Department</a></li>
-      <li><a href="/syllabus">Syllabus</a></li>
-      <li><a href="/additional-info">Check Extra</a></li>
-    </ul>
-  </nav>
+            <div class="footer-section">
+                <h3>LATEST EVENTS</h3>
+                <p>Annual Prize Distribution Function Session 2023-24</p>
+            </div>
 
-  <!-- 🔹 Title Bar -->
-  <div class="title-bar">
-    <h1>Department of BCA & PGDCA</h1>
-  </div>
+            <div class="footer-section">
+                <h3>USEFUL LINKS</h3>
+                <ul>
+                    <li><a href="https://www.hpuniv.ac.in/">HPU - Shimla</a></li>
+                    <li><a href="https://gcbilaspur.in/">Government College Bilaspur</a></li>
+                </ul>
+            </div>
 
-  <!-- 🔹 Photo Gallery Section -->
-  <section class="gallery">
-    <h2> Photo Gallery</h2>
-    <div class="gallery-container">
-      <img src="/images/photo1.jpg" alt="Event 1">
-      <img src="/images/photo2.jpg" alt="Event 2">
-      <img src="/images/photo3.jpg" alt="Event 3">
-      <!-- <img src="/images/photo4.jpg" alt="Event 4"> -->
-    </div>
-    <div class="gallery-buttons">
-      <button id="prev">⬅️</button>
-      <button id="next">➡️</button>
-    </div>
-  </section>
-
-  <!-- 🔹 Message from HOD -->
-  <section class="hod-message">
-    <h2>📜 Message from HOD</h2>
-    <p>Welcome to the Department of BCA & PGDCA. Our department is committed to providing quality education and
-      fostering an environment where students can excel in technology and research. We encourage students to engage in
-      hands-on learning and explore their potential.</p>
-    <p><strong>- Prof. Tej Singh (Head of Department)</strong></p>
-  </section>
-
-  <!-- 🔹 Footer -->
-  <footer class="footer">
-
-    <!-- <div class="footer-links">
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions</a>
-      <a href="/contact">Contact Us</a>
-    </div> -->
-
-    <p>&copy; 2025 Department of BCA & PGDCA, Government College Bilaspur</p>
-  </footer>
-
+            <div class="footer-section">
+                <h3>CONTACT US</h3>
+                <p><strong>Email:</strong> principalpgpgbilaspur@gmail.com</p>
+                <p><strong>Phone No:</strong> 01978222417</p>
+                <div class="map">
+                    <div style="width: 100%"><iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q=GPGC%20bilaspur%20Himachal%20Pradesh%20India+(Gpgc%20Bilaspur)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/collections/drones/">drones ireland</a></iframe>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
-
+<script src="js/home.js"></script>
 </html>

@@ -13,20 +13,30 @@
 
     <!-- 🔹 Navbar -->
     <nav class="navbar">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/faculty">Department & Faculty</a></li>
-            <li><a href="/additional-info">Additional Info</a></li>
+        <div class="logo">
+            <img src="images/bca.png" alt="UsabilityHub Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="./">Home</a></li>
+            <li><a href="./faculty">Faculty</a></li>
+            <li><a href="./syllabus">Syllabus</a></li>
+            <li><a href="./additional-info">Study Material</a></li>
+            <li><a href="https://gcbilaspur.in/gallery/7">Gallery</a></li>
         </ul>
-    </nav>
+        <div class="buttons">
+            <!-- <a href="student-login"><button class="signin">Sign in</button></a>
+            <a href="student-register"><button class="signup">Sign up</button></a> -->
+        </div>
+    </nav><br><br>
 
     <div class="container">
         <main class="content">
-            <h1>Syllabus</h1>
+            <h1 style="text-align: center;">Syllabus</h1>
+            <hr style="height: 3px;background-color: #0073e6c4; border: none;">
 
             <!-- 🔹 Dropdown for Semesters -->
             <div class="dropdown">
-                <button class="dropdown-button" onclick="toggleDropdown()">Select Semester</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <button class="dropdown-button" onclick="toggleDropdown()">Select Semester</button>
                 <ul class="dropdown-menu" id="dropdown-menu">
                     <% for(let sem in syllabus) { %>
                         <li onclick="showSemester('<%= sem %>')">Semester <%= sem %>
@@ -53,7 +63,43 @@
                     <% } %>
             </div>
         </main>
-    </div>
+    </div><br><br>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="https://gcbilaspur.in/anti-ragging%20Cell">Anti Ragging</a></li>
+                    <li><a href="https://gcbilaspur.in/photo-gallery">Gallery</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Meritlist</a></li>
+                    <li><a href="#">Facilities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>LATEST EVENTS</h3>
+                <p>Annual Prize Distribution Function Session 2023-24</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>USEFUL LINKS</h3>
+                <ul>
+                    <li><a href="https://www.hpuniv.ac.in/">HPU - Shimla</a></li>
+                    <li><a href="https://gcbilaspur.in/">Government College Bilaspur</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>CONTACT US</h3>
+                <p><strong>Email:</strong> principalpgpgbilaspur@gmail.com</p>
+                <p><strong>Phone No:</strong> 01978222417</p>
+                <div class="map">
+                    <div style="width: 100%"><iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q=GPGC%20bilaspur%20Himachal%20Pradesh%20India+(Gpgc%20Bilaspur)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/collections/drones/">drones ireland</a></iframe>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         function toggleDropdown() {
